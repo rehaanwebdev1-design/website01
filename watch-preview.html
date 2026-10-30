@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111113">
+  <title>Meme's Treasures — Watch Scroll Preview</title>
+  <link rel="stylesheet" href="./watch-preview.css">
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true"></div>
+  <div class="model" aria-hidden="true"></div>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">MEME'S TREASURES · PRE-LOVED LUXURY</p>
+      <h1>Time, in<br><em>motion.</em></h1>
+      <p class="intro-copy">A closer look at a considered classic. Scroll to explore every angle.</p>
+      <a class="scroll-cue" href="#details"><span></span>SCROLL TO DISCOVER</a>
+    </section>
+
+    <section class="info" id="details">
+      <div class="section-label">01 / A CLOSER LOOK</div>
+      <div class="info-copy">
+        <p class="eyebrow">DESIGNED TO BE DISCOVERED</p>
+        <h2>Details make<br>the moment.</h2>
+        <p>Turn the watch through the story. Scroll to follow its movement and see the piece from every side.</p>
+      </div>
+      <div class="detail-tags"><span>PRE-LOVED FINDS</span><span>THOUGHTFULLY CURATED</span><span>MEME'S TREASURES</span></div>
+      <div class="scroll-cue"><span></span>KEEP SCROLLING</div>
+    </section>
+
+    <section class="product-overview" id="scanner">
+      <div class="header-2"><h2>Worth keeping.</h2></div>
+      <div class="circular-mask" aria-hidden="true"></div>
+      <div class="tooltips">
+        <article class="tooltip">
+          <div class="icon" aria-hidden="true">✦</div>
+          <div class="divider"></div>
+          <div class="title"><h3><span>Authenticity matters</span></h3></div>
+          <div class="description"><p>Review each item's condition and any available authenticity documentation.</p></div>
+        </article>
+        <article class="tooltip">
+          <div class="icon" aria-hidden="true">◈</div>
+          <div class="divider"></div>
+          <div class="title"><h3><span>Find your next favorite</span></h3></div>
+          <div class="description"><p>Discover considered classics, specialist finds, and details worth a closer look.</p></div>
+        </article>
+      </div>
+      <div class="overview-label">MEME'S TREASURES · A CLOSER LOOK</div>
+    </section>
+
+    <section class="outro">
+      <p class="eyebrow">MEME'S TREASURES</p>
+      <h2>Find the piece<br>that feels like <em>you.</em></h2>
+      <p>Explore pre-loved luxury, thoughtfully curated.</p>
+      <a class="shop-link" href="./collections.html">EXPLORE THE COLLECTION <span>↗</span></a>
+    </section>
+  </main>
+  <div id="message" class="message" role="status">Loading watch…</div>
+  <label id="fileFallback" class="file-fallback" for="watchFile" hidden>Choose josta.glb<input id="watchFile" type="file" accept=".glb,model/gltf-binary"></label>
+  <script src="https://unpkg.com/lenis@1.1.16/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/utils/BufferGeometryUtils.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="./watch-preview.js"></script>
+</body>
+</html>

@@ -17,7 +17,6 @@
   const lenis = new Lenis({ wheelMultiplier: 0.68 });
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time) => lenis.raf(time * 1000));
-  gsap.ticker.lagSmoothing(0);
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.01, 1000);
@@ -42,8 +41,13 @@
   environment.encoding = THREE.sRGBEncoding;
   scene.environment = environment;
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 700 ? 1.15 : 1.5));
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+  const mobileViewport = () => window.matchMedia('(max-width: 700px)').matches;
+  const renderRatio = () => Math.min(
+    window.devicePixelRatio || 1,
+    mobileViewport() ? 1.25 : 1.5,
+  );
+  renderer.setPixelRatio(renderRatio());
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 0.92;
@@ -183,7 +187,7 @@
         trigger: overviewSection,
         start: 'top top',
         end: 'bottom top',
-        scrub: 0.12,
+        scrub: mobileViewport() ? true : 0.12,
       },
     })
       .to(circularMask, { clipPath: 'circle(100% at 50% 50%)', duration: 0.1, ease: 'none' }, 0.16)
@@ -193,6 +197,8 @@
       .to(secondTooltip, { y: '0%', duration: 0.18, stagger: 0.035, ease: 'power2.out' }, 0.72)
       .to(model.rotation, { y: baseTiltY + Math.PI * 4, duration: 0.85, ease: 'none' }, 0.05);
 
+    overviewSection.classList.add('watch-ready');
+
     const storySection = document.querySelector('.story');
     const worthBridge = document.querySelector('.worth-bridge');
     if (storySection && worthBridge) {
@@ -201,7 +207,7 @@
           trigger: storySection,
           start: 'top top',
           end: 'top -65%',
-          scrub: 0.12,
+          scrub: mobileViewport() ? true : 0.12,
         },
       })
         .fromTo(worthBridge, { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.25, ease: 'power2.out' }, 0)
@@ -240,12 +246,14 @@
     loadUrl(disposedObjectUrl);
   });
 
-  lenis.on('scroll', (event) => { currentScroll = event.scroll; });
+  lenis.on('scroll', (event) => {
+    currentScroll = event.scroll;
+  });
 
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 700 ? 1.15 : 1.5));
+    renderer.setPixelRatio(renderRatio());
     renderer.setSize(window.innerWidth, window.innerHeight);
     scannerPosition = overviewSection.offsetTop;
     ScrollTrigger.refresh();

@@ -26,6 +26,9 @@
   });
 
   const revealItems = document.querySelectorAll('.reveal');
+  // Keep content visible by default. Only hide it after the reveal observer is
+  // ready, so a blocked script or unsupported browser cannot leave blank sections.
+  revealItems.forEach((item) => item.classList.add('will-reveal'));
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
